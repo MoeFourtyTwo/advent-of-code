@@ -26,8 +26,11 @@ def _parse_task(day, part):
 
 def run(day: int = -1, part: int = -1) -> None:
     day, part = _parse_task(day, part)
-    mod = importlib.import_module(f"aoc.tasks.day_{day:02d}.part_{part}")
-    mod.go()
+    try:
+        mod = importlib.import_module(f"aoc.tasks.day_{day:02d}.part_{part}")
+        mod.go()
+    except ImportError as e:
+        logger.error(f"Received import error: {e}. Did you run generate?")
 
 
 def generate(day: int = -1) -> None:
