@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "advent-of-code-2022"
+version = "0.1.0"
+description = ""
+authors = ["Moritz Strenger <moritz.strenger@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "aoc"}]
+
+[tool.poetry.scripts]
+exec = "aoc.runner:main"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+rich = "^12.6.0"
+fire = "^0.4.0"
+numpy = "^1.23.5"
+pandas = "^1.5.2"
+loguru = "^0.6.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+pre-commit = "^2.20.0"
+pytest = "^7.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 120
