@@ -18,7 +18,10 @@ def _parse_task(day, part):
         logger.info(f"Defaulting to {day=}")
 
     if part not in (1, 2):
-        part = 1
+        if (_TASK_ROOT / f"day_{day:02d}" / f"part_1.py").exists():
+            part = 2
+        else:
+            part = 1
         logger.info(f"Defaulting to {part=}")
 
     return day, part
@@ -33,19 +36,26 @@ def run(day: int = -1, part: int = -1) -> None:
         logger.error(f"Received import error: {e}. Did you run generate?")
 
 
-def generate(day: int = -1) -> None:
-    day, _ = _parse_task(day, 1)
+def generate(day: int = -1, part: int = -1) -> None:
+    day, part = _parse_task(day, part)
 
-    try:
-        shutil.copytree(_TEMPLATE_PATH, _TASK_ROOT / f"day_{day:02d}")
-    except FileExistsError:
-        logger.warning("Already created Python code.")
+    if part == 1:
+        try:
+            shutil.copytree(_TEMPLATE_PATH, _TASK_ROOT / f"day_{day:02d}")
+        except FileExistsError:
+            logger.warning("Already created Python code.")
 
-    for part in (1, 2):
         path = DATA_ROOT / f"day_{day:02d}" / f"part_{part}"
         path.mkdir(parents=True)
         with open(path / "input.txt", "w+"):
             pass
+    elif part == 2:
+        try:
+            shutil.copy(_TASK_ROOT / f"day_{day:02d}" / f"part_1.py", _TASK_ROOT / f"day_{day:02d}" / f"part_2.py")
+        except FileExistsError:
+            logger.warning("Already created Python code.")
+
+        shutil.copytree(DATA_ROOT / f"day_{day:02d}" / f"part_1", DATA_ROOT / f"day_{day:02d}" / f"part_2")
 
 
 def main():
