@@ -10,8 +10,10 @@ def get_data_path(file: str) -> pathlib.Path:
     return DATA_ROOT / f"day_{day:02d}" / f"part_{part:1d}" / "input.txt"
 
 
-def get_lines(path: pathlib.Path, strip: bool = True) -> list[str]:
+def get_lines(path: pathlib.Path, strip: bool = True, rstrip: bool = False) -> list[str]:
     with open(path) as f:
         if strip:
             return list(map(str.strip, f.readlines()))
+        if rstrip:
+            return list(map(str.rstrip, f.readlines()))
         return f.readlines()
