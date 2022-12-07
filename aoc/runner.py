@@ -47,7 +47,7 @@ def generate(day: int = -1, part: int = -1) -> None:
         except FileExistsError:
             logger.warning("Already created Python code.")
 
-        path = DATA_ROOT / f"day_{day:02d}" / f"part_1"
+        path = DATA_ROOT / f"day_{day:02d}"
         path.mkdir(parents=True)
         with open(path / "input.txt", "w+"):
             pass
@@ -56,8 +56,6 @@ def generate(day: int = -1, part: int = -1) -> None:
             shutil.copy(_TASK_ROOT / f"day_{day:02d}" / f"part_1.py", _TASK_ROOT / f"day_{day:02d}" / f"part_2.py")
         except FileExistsError:
             logger.warning("Already created Python code.")
-
-        shutil.copytree(DATA_ROOT / f"day_{day:02d}" / f"part_1", DATA_ROOT / f"day_{day:02d}" / f"part_2")
 
 
 def main():
