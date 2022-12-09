@@ -1,0 +1,8 @@
+from aoc.common.storage import get_data_path
+from aoc.tasks.$day.$part import go
+
+TEST_PATH = get_data_path(__file__, "test.txt")
+
+
+def test_go():
+    assert True
