@@ -1,12 +1,13 @@
 import functools
 import time
+from typing import Callable
 
 from loguru import logger
 
 
-def timeit(f):
+def timeit(f: Callable[[...], ...]):
     @functools.wraps(f)
-    def timeit_wrapper(*args, **kwargs):
+    def timeit_wrapper(*args, **kwargs) -> Callable[[...], ...]:
         start_time = time.perf_counter()
         result = f(*args, **kwargs)
         end_time = time.perf_counter()

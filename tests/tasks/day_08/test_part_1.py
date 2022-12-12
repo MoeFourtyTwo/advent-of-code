@@ -4,5 +4,5 @@ from aoc.tasks.day_08.part_1 import go
 TEST_PATH = get_data_path(__file__, "test.txt")
 
 
-def test_go():
+def test_day_08_part_1_go():
     assert go(path=TEST_PATH) == 21

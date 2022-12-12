@@ -4,5 +4,5 @@ from aoc.tasks.$day.$part import go
 TEST_PATH = get_data_path(__file__, "test.txt")
 
 
-def test_go():
+def test_${day}_${part}_go():
     assert True
