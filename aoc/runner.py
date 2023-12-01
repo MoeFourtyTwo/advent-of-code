@@ -40,7 +40,8 @@ def run(year: int = -1, day: int = -1, part: int = -1) -> None:
     year, day, part = _parse_task(year, day, part)
     try:
         mod = importlib.import_module(f"aoc.tasks.year_{year}.day_{day:02d}.part_{part}")
-        mod.go()
+        output = mod.go()
+        logger.info(f"{output = }")
     except ImportError as e:
         logger.error(f"Received import error: {e}. Did you run generate?")
 
