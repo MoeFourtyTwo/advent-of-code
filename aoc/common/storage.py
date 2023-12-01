@@ -6,9 +6,10 @@ DATA_ROOT = pathlib.Path(__file__).parents[2] / "data"
 
 
 def get_data_path(file: str, file_name: str = "input.txt") -> pathlib.Path:
+    year = int(pathlib.Path(file).parent.parent.name.split("_")[-1])
     day = int(pathlib.Path(file).parent.name.split("_")[-1])
 
-    return DATA_ROOT / f"day_{day:02d}" / file_name
+    return DATA_ROOT / f"year_{year}" / f"day_{day:02d}" / file_name
 
 
 def get_lines(path: pathlib.Path, strip: bool = True, rstrip: bool = False) -> list[str]:

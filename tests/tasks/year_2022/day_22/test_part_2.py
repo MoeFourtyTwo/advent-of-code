@@ -1,8 +1,7 @@
 from aoc.common.storage import get_data_path
-from aoc.tasks.$year.$day.$part import go
 
 TEST_PATH = get_data_path(__file__, "test.txt")
 
 
-def test_${year}_${day}_${part}_go():
+def test_year_2022_day_22_part_2_go():
     assert True
