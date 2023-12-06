@@ -16,11 +16,11 @@ _TEST_TEMPLATE_PATH = _TEST_TASK_ROOT / "_template_day" / "test_template.txt"
 
 
 def _parse_task(year, day, part):
-    if year <= 0:
+    if not isinstance(year, int) or year <= 0:
         year = datetime.datetime.now().year
         logger.info(f"Defaulting to {year=}")
 
-    if day <= 0:
+    if not isinstance(day, int) or day <= 0:
         day = datetime.datetime.now().day
         logger.info(f"Defaulting to {day=}")
 
