@@ -4,6 +4,20 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      year:
+        description: 'Determines the year of the riddle.'
+        required: true
+        default: "auto"
+      day:
+        description: 'Determines the day of the riddle.'
+        required: true
+        default: "auto"
+      part:
+        description: 'Determines the part of the riddle.'
+        required: true
+        default: "auto"
 
 jobs:
   build:
@@ -36,5 +50,4 @@ jobs:
 
     - name: Run script
       run: |
-        # Your script execution command goes here
-        pip list
+        poetry run exec run --year "${{ inputs.year }}" --day "${{ inputs.day }}" --part "${{ inputs.part }}"
