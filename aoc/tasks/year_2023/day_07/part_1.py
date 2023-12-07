@@ -10,11 +10,11 @@ from aoc.common.storage import get_data_path, get_lines
 DATA_PATH = get_data_path(__file__)
 
 CARD_RANKS = {k: r for r, k in enumerate(["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"])}
-HAND_RANKS = [{5}, {4, 1}, {3, 2}, {3, 1, 1}, {2, 2, 1}, {2, 1, 1, 1}, {1, 1, 1, 1, 1}]
+HAND_RANKS = [[5], [4, 1], [3, 2], [3, 1, 1], [2, 2, 1], [2, 1, 1, 1], [1, 1, 1, 1, 1]]
 
 
 def rank_hand(hand: str) -> int:
-    hand_count = set(Counter(hand).values())
+    hand_count = sorted(Counter(hand).values(), reverse=True)
     for index, hand_rank in enumerate(HAND_RANKS):
         if hand_count == hand_rank:
             return index
