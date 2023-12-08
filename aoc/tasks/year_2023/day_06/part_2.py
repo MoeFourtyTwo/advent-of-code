@@ -15,7 +15,7 @@ def calc_distance(hold_time: int, max_time: int) -> int:
 
 
 @timeit
-def go(path: pathlib.Path = DATA_PATH):
+def go(path: pathlib.Path = DATA_PATH) -> int:
     lines = get_lines(path)
 
     max_time = int(lines[0].split(":")[1].replace(" ", ""))

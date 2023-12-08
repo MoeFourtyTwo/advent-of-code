@@ -44,7 +44,7 @@ def compare(hand_x: str, hand_y: str) -> int:
 
 
 @timeit
-def go(path: pathlib.Path = DATA_PATH):
+def go(path: pathlib.Path = DATA_PATH) -> int:
     lines = get_lines(path)
 
     hand_bid_pairs = [line.split() for line in lines]
