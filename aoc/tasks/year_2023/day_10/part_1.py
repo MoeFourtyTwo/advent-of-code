@@ -22,6 +22,11 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
     last_row, last_column = row, column
     distance = 0
 
+    from_left = ("L", "-", "F")
+    from_right = ("L", "-", "F")
+    from_top = ("|", "L", "J")
+    from_bot = ("7", "|", "F")
+
     while data[row, column] != "S" or distance == 0:
         current_pos_cache = (row, column)
         distance += 1
@@ -51,14 +56,14 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
                 else:
                     row += 1
             case "S":
-                if data[row + 1, column] in ("|", "L", "J"):
+                if data[row + 1, column] in from_top:
                     row += 1
-                elif data[row, column + 1] in ("-", "J", "7"):
+                elif data[row, column + 1] in from_right:
                     column += 1
-                elif data[row - 1, column] in ("-", "L", "F"):
-                    row -= 1
-                else:
+                elif data[row, column - 1] in from_left:
                     column -= 1
+                else:
+                    row -= 1
         last_row, last_column = current_pos_cache
 
     return distance // 2

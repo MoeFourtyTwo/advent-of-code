@@ -1,32 +1,13 @@
 from __future__ import annotations
 
 import pathlib
-import sys
 
 import numpy as np
-import numpy.typing as npt
 
 from aoc.common.decorators import timeit
 from aoc.common.storage import get_data_path, get_lines
 
 DATA_PATH = get_data_path(__file__)
-
-
-def expand(path: npt.NDArray[np.int_, np.int_], x: int, y: int) -> None:
-    try:
-        if path[x, y] == 0:
-            path[x, y] = -1
-            expand(path, x - 1, y - 1)
-            expand(path, x - 1, y)
-            expand(path, x - 1, y + 1)
-            expand(path, x, y - 1)
-            expand(path, x, y + 1)
-            expand(path, x + 1, y - 1)
-            expand(path, x + 1, y)
-            expand(path, x + 1, y + 1)
-
-    except IndexError:
-        pass
 
 
 @timeit
@@ -42,6 +23,11 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
 
     last_row, last_column = row, column
     distance = 0
+
+    from_left = ("L", "-", "F")
+    from_right = ("L", "-", "F")
+    from_top = ("|", "L", "J")
+    from_bot = ("7", "|", "F")
 
     while data[row, column] != "S" or distance == 0:
         current_pos_cache = (row, column)
@@ -73,23 +59,50 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
                 else:
                     row += 1
             case "S":
-                if data[row + 1, column] in ("|", "L", "J"):
+                if data[row + 1, column] in from_top:
                     row += 1
-                elif data[row, column + 1] in ("-", "J", "7"):
+                elif data[row, column + 1] in from_right:
                     column += 1
-                elif data[row - 1, column] in ("-", "L", "F"):
-                    row -= 1
-                else:
+                elif data[row, column - 1] in from_left:
                     column -= 1
+                else:
+                    row -= 1
         last_row, last_column = current_pos_cache
-
-    sys.setrecursionlimit(142 * 142)
-    expand(path, 0, 0)
 
     cleaned_data = np.zeros_like(data, dtype=str)
     cleaned_data[path == 1] = data[path == 1]
 
-    positions = np.where(path == 0)
+    # Replace start
+    if data[row + 1, column] in from_bot:
+        if data[row, column - 1] in from_left:
+            cleaned_data[row, column] = "7"
+        elif data[row - 1, column] in from_bot:
+            cleaned_data[row, column] = "|"
+        else:
+            cleaned_data[row, column] = "F"
+    elif data[row, column + 1] in from_right:
+        if data[row + 1, column] in from_bot:
+            cleaned_data[row, column] = "F"
+        elif data[row, column - 1] in from_left:
+            cleaned_data[row, column] = "-"
+        else:
+            cleaned_data[row, column] = "L"
+    elif data[row - 1, column] in from_top:
+        if data[row + 1, column] in from_top:
+            cleaned_data[row, column] = "|"
+        elif data[row - 1, column] in from_left:
+            cleaned_data[row, column] = "7"
+        else:
+            cleaned_data[row, column] = "F"
+    else:  # from_left
+        if data[row + 1, column] in from_bot:
+            cleaned_data[row, column] = "7"
+        elif data[row - 1, column] in from_top:
+            cleaned_data[row, column] = "J"
+        else:
+            cleaned_data[row, column] = "-"
+
+    positions = np.where(cleaned_data == "")
 
     inner_count = 0
     for row, column in zip(*positions):
