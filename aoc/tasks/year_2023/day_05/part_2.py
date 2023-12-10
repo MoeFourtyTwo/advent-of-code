@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pathlib
-from operator import itemgetter
 
 from aoc.common.decorators import timeit
 from aoc.common.storage import get_data_path, get_lines
