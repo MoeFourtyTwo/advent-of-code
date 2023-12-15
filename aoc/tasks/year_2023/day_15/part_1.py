@@ -18,7 +18,7 @@ def calc_hash(data: str) -> int:
 
 
 @timeit
-def go(path: pathlib.Path = DATA_PATH):
+def go(path: pathlib.Path = DATA_PATH) -> int:
     [line] = get_lines(path)
 
     return sum(map(calc_hash, line.split(",")))
