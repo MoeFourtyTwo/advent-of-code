@@ -34,14 +34,18 @@ def build_graph(lines: list[str]) -> nx.DiGraph:
                 for target in targets:
                     cost = 0
                     for row_offset, col_offset in zip(*offsets[target]):
-                        try:
-                            cost += int(lines[row_index + row_offset][col_index + col_offset])
-                        except IndexError:
+                        target_row_index = row_index + row_offset
+                        target_col_index = col_index + col_offset
+                        if target_row_index not in range(len(lines)) or target_col_index not in range(
+                            len(lines[target_row_index])
+                        ):
                             continue
+
+                        cost += int(lines[target_row_index][target_col_index])
 
                         graph.add_edge(
                             f"{row_index},{col_index},{source}",
-                            f"{row_index + row_offset},{col_index + col_offset},{target}",
+                            f"{target_row_index},{target_col_index},{target}",
                             cost=cost,
                         )
     for direction in combinations.keys():
