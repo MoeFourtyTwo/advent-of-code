@@ -1,70 +1,13 @@
 from __future__ import annotations
 
-import dataclasses
-import enum
-import heapq
-import itertools
-import operator
 import pathlib
 
 import networkx as nx
-import numpy as np
-import numpy.typing as npt
 
 from aoc.common.decorators import timeit
 from aoc.common.storage import get_data_path, get_lines
 
 DATA_PATH = get_data_path(__file__)
-
-
-class Directions(complex, enum.Enum):
-    UP = complex(-1, 0)
-    RIGHT = complex(0, 1)
-    DOWN = complex(1, 0)
-    LEFT = complex(0, -1)
-
-
-def get_value(data: npt.NDArray[int, int], position: complex) -> int:
-    return int(data[int(position.real), int(position.imag)])
-
-
-def set_value(data: npt.NDArray[int, int], position: complex, value: int) -> None:
-    data[int(position.real), int(position.imag)] = value
-
-
-def count_consecutive(path: list[Directions]) -> int:
-    if not path:
-        return 0
-    last = path[-1]
-    for i, p in enumerate(reversed(path)):
-        if last != p:
-            return i
-    return len(path)
-
-
-@dataclasses.dataclass
-class Step:
-    cost: int
-    position: complex
-    path: list[Directions]
-    target: complex
-
-    @property
-    def consecutive(self) -> int:
-        return count_consecutive(self.path)
-
-    @property
-    def last_direction(self) -> Directions | None:
-        if not self.path:
-            return None
-        return self.path[-1]
-
-    @property
-    def estimated(self) -> int:
-        return int(abs(self.position.real - self.target.real) + abs(self.position.imag - self.target.imag))
-
-    def __lt__(self, other: Step):
-        return (self.cost + self.estimated * 10) < (other.cost + other.estimated * 10)
 
 
 @timeit
