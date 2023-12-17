@@ -11,9 +11,7 @@ DATA_PATH = get_data_path(__file__)
 
 
 @timeit
-def go(path: pathlib.Path = DATA_PATH):
-    lines = get_lines(path)
-
+def build_graph(lines: list[str]) -> nx.DiGraph:
     graph = nx.DiGraph()
 
     combinations = {
@@ -22,14 +20,14 @@ def go(path: pathlib.Path = DATA_PATH):
         "down": ["left", "right"],
         "left": ["up", "down"],
     }
-
     offsets = {
-        "up": ([-1, -2, -3], [0, 0, 0]),
-        "right": ([0, 0, 0], [1, 2, 3]),
-        "down": ([1, 2, 3], [0, 0, 0]),
-        "left": ([0, 0, 0], [-1, -2, -3]),
+        "up": (list(range(-1, -4, -1)), [0] * 3),
+        "right": ([0] * 3, list(range(1, 4))),
+        "down": (list(range(1, 4)), [0] * 3),
+        "left": ([0] * 3, list(range(-1, -4, -1))),
     }
 
+    min_offset = 4
     for row_index, row in enumerate(lines):
         for col_index, c in enumerate(row):
             for source, targets in combinations.items():
@@ -43,18 +41,31 @@ def go(path: pathlib.Path = DATA_PATH):
 
                         graph.add_edge(
                             f"{row_index},{col_index},{source}",
-                            f"{row_index+row_offset},{col_index+col_offset},{target}",
+                            f"{row_index + row_offset},{col_index + col_offset},{target}",
                             cost=cost,
                         )
-
     for direction in combinations.keys():
         graph.add_edge("start", f"0,0,{direction}", cost=0)
         graph.add_edge(f"{len(lines) - 1},{len(lines[0]) - 1},{direction}", "target", cost=0)
 
+    return graph
+
+
+@timeit
+def calc_min_heat_loss(graph: nx.DiGraph) -> int:
     shortest_path = nx.shortest_path(graph, "start", "target", weight="cost")
     cost = nx.path_weight(graph, shortest_path, weight="cost")
-
     return cost
+
+
+@timeit
+def go(path: pathlib.Path = DATA_PATH):
+    lines = get_lines(path)
+
+    graph = build_graph(lines)
+    loss = calc_min_heat_loss(graph)
+
+    return loss
 
 
 if __name__ == "__main__":
