@@ -1,0 +1,73 @@
+from __future__ import annotations
+
+import pathlib
+
+import networkx as nx
+
+from aoc.common.decorators import timeit
+from aoc.common.storage import get_data_path, get_lines
+
+DATA_PATH = get_data_path(__file__)
+
+
+@timeit
+def build_graph(lines: list[str]) -> nx.DiGraph:
+    graph = nx.DiGraph()
+
+    combinations = {
+        "up": ["left", "right"],
+        "right": ["up", "down"],
+        "down": ["left", "right"],
+        "left": ["up", "down"],
+    }
+    offsets = {
+        "up": (list(range(-1, -11, -1)), [0] * 10),
+        "right": ([0] * 10, list(range(1, 11))),
+        "down": (list(range(1, 11)), [0] * 10),
+        "left": ([0] * 11, list(range(-1, -11, -1))),
+    }
+
+    min_offset = 4
+    for row_index, row in enumerate(lines):
+        for col_index, c in enumerate(row):
+            for source, targets in combinations.items():
+                for target in targets:
+                    cost = 0
+                    for row_offset, col_offset in zip(*offsets[target]):
+                        try:
+                            cost += int(lines[row_index + row_offset][col_index + col_offset])
+                        except IndexError:
+                            continue
+
+                        if abs(row_offset) >= min_offset or abs(col_offset) >= min_offset:
+                            graph.add_edge(
+                                f"{row_index},{col_index},{source}",
+                                f"{row_index + row_offset},{col_index + col_offset},{target}",
+                                cost=cost,
+                            )
+    for direction in combinations.keys():
+        graph.add_edge("start", f"0,0,{direction}", cost=0)
+        graph.add_edge(f"{len(lines) - 1},{len(lines[0]) - 1},{direction}", "target", cost=0)
+
+    return graph
+
+
+@timeit
+def calc_min_heat_loss(graph: nx.DiGraph) -> int:
+    shortest_path = nx.shortest_path(graph, "start", "target", weight="cost")
+    cost = nx.path_weight(graph, shortest_path, weight="cost")
+    return cost
+
+
+@timeit
+def go(path: pathlib.Path = DATA_PATH):
+    lines = get_lines(path)
+
+    graph = build_graph(lines)
+    loss = calc_min_heat_loss(graph)
+
+    return loss
+
+
+if __name__ == "__main__":
+    go()
