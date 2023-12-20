@@ -68,8 +68,6 @@ def generate(year: int = -1, day: int = -1, part: int = -1) -> None:
 
         path = DATA_ROOT / f"year_{year}" / f"day_{day:02d}"
         path.mkdir(parents=True, exist_ok=True)
-        with open(path / "input.txt", "w+"):
-            pass
         with open(path / "test.txt", "w+"):
             pass
     elif part == 1:
