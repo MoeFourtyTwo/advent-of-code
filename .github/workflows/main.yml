@@ -49,5 +49,7 @@ jobs:
         poetry install
 
     - name: Run script
+      env:
+        AOC_SESSION: ${{ secrets.AOC_SESSION }}
       run: |
         poetry run exec run --year "${{ inputs.year }}" --day "${{ inputs.day }}" --part "${{ inputs.part }}"
