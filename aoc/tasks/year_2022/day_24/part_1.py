@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import enum
 import functools
-import itertools
 import pathlib
 import typing
 

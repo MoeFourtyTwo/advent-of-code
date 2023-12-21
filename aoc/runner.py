@@ -25,9 +25,9 @@ def _parse_task(year, day, part):
         logger.info(f"Defaulting to {day=}")
 
     if part not in (1, 2):
-        if _TASK_ROOT.joinpath(f"year_{year}").joinpath(f"day_{day:02d}").joinpath(f"part_2.py").exists():
+        if _TASK_ROOT.joinpath(f"year_{year}").joinpath(f"day_{day:02d}").joinpath("part_2.py").exists():
             part = 2
-        elif _TASK_ROOT.joinpath(f"year_{year}").joinpath(f"day_{day:02d}").joinpath(f"part_1.py").exists():
+        elif _TASK_ROOT.joinpath(f"year_{year}").joinpath(f"day_{day:02d}").joinpath("part_1.py").exists():
             part = 1
         else:
             part = -1
@@ -73,8 +73,8 @@ def generate(year: int = -1, day: int = -1, part: int = -1) -> None:
     elif part == 1:
         try:
             shutil.copy(
-                _TASK_ROOT / f"year_{year}" / f"day_{day:02d}" / f"part_1.py",
-                _TASK_ROOT / f"year_{year}" / f"day_{day:02d}" / f"part_2.py",
+                _TASK_ROOT / f"year_{year}" / f"day_{day:02d}" / "part_1.py",
+                _TASK_ROOT / f"year_{year}" / f"day_{day:02d}" / "part_2.py",
             )
         except FileExistsError:
             logger.warning("Already created Python code.")

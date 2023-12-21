@@ -9,7 +9,7 @@ DATA_PATH = get_data_path(__file__)
 
 
 def count_errors(left: str, right: str) -> int:
-    return sum(l != r for l, r in zip(left, right))
+    return sum(l != r for l, r in zip(left, right))  # noqa E741
 
 
 def check_axis(data: list[str], index: int) -> bool:

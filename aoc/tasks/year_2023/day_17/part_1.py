@@ -27,7 +27,6 @@ def build_graph(lines: list[str]) -> nx.DiGraph:
         "left": ([0] * 3, list(range(-1, -4, -1))),
     }
 
-    min_offset = 4
     for row_index, row in enumerate(lines):
         for col_index, c in enumerate(row):
             for source, targets in combinations.items():

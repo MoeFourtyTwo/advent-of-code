@@ -21,7 +21,7 @@ def convert_to_int(snafu_number: str) -> int:
 
 
 def convert_to_snafu(number: int) -> str:
-    l = round(math.log(number, 5))
+    l = round(math.log(number, 5))  # noqa E741
 
     snafu_digits = ""
     int_value = 0

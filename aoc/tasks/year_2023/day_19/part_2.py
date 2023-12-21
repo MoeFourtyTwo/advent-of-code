@@ -71,11 +71,11 @@ def inverted_condition(step: str) -> str:
     condition, _ = step.split(":")
 
     if "<" in condition:
-        l, r = condition.split("<")
+        l, r = condition.split("<")  # noqa E741
         return l + ">" + str(int(r) - 1)
 
     if ">" in condition:
-        l, r = condition.split(">")
+        l, r = condition.split(">")  # noqa E741
         return l + "<" + str(int(r) + 1)
 
 

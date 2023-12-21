@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import dataclasses
 import functools
 import itertools
 import math
@@ -8,7 +7,6 @@ import pathlib
 import typing
 from collections import defaultdict
 
-import networkx as nx
 from loguru import logger
 
 from aoc.common.decorators import timeit

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import collections
-import dataclasses
 import pathlib
 
 from aoc.common.decorators import timeit

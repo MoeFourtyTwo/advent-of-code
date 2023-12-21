@@ -1,4 +1,3 @@
-import numpy as np
 import pytest
 
 from aoc.common.storage import get_data_path

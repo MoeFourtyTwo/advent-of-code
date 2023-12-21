@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import enum
 import pathlib
 
 import numpy as np
 import numpy.typing as npt
-from tqdm import trange
 
 from aoc.common.decorators import timeit
 from aoc.common.storage import get_data_path, get_lines

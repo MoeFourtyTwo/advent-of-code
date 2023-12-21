@@ -36,7 +36,7 @@ def test_wants_to_follow():
 
     head.position = Position(3, 3)
 
-    assert tail.wants_to_follow == True
+    assert tail.wants_to_follow
 
 
 def test_step():

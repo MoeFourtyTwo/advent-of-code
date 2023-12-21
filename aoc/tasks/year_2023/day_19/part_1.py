@@ -27,12 +27,12 @@ def evaluate(workflows: dict[str, list[str]], data: dict[str, int], workflow_nam
         condition, response = step.split(":")
 
         if "<" in condition:
-            l, r = condition.split("<")
+            l, r = condition.split("<")  # noqa E741
             if data[l] < int(r):
                 return handle_single(workflows, data, response)
 
         if ">" in condition:
-            l, r = condition.split(">")
+            l, r = condition.split(">")  # noqa E741
             if data[l] > int(r):
                 return handle_single(workflows, data, response)
 

@@ -11,7 +11,7 @@ def go():
     [line] = get_lines(DATA_PATH)
 
     index = 0
-    l = 14
+    l = 14  # noqa E741
     for index in range(l, len(line)):
         s = set(line[index - l : index])
         if len(s) == l:

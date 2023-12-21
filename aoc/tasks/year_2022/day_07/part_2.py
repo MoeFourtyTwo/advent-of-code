@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import dataclasses
-import functools
 
 from loguru import logger
 
@@ -85,11 +84,11 @@ def go():
         nonlocal candidate_size
 
         for child in node:
-            l = len(child)
-            if l >= min_deletion_required:
+            child_len = len(child)
+            if child_len >= min_deletion_required:
                 evaluate_candidate(child)
-                if l < candidate_size:
-                    candidate_size = l
+                if child_len < candidate_size:
+                    candidate_size = child_len
 
     evaluate_candidate(root)
 

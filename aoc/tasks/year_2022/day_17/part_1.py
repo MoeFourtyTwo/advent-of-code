@@ -5,7 +5,6 @@ import typing
 
 import numpy as np
 from loguru import logger
-from tqdm import trange
 
 from aoc.common.decorators import timeit
 from aoc.common.storage import get_data_path, get_lines

@@ -5,7 +5,6 @@ import functools
 import pathlib
 
 from loguru import logger
-from rich.progress import track
 from tqdm import tqdm, trange
 
 from aoc.common.decorators import timeit

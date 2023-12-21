@@ -4,7 +4,6 @@ import pathlib
 import typing
 from operator import attrgetter
 
-import numpy as np
 from loguru import logger
 
 from aoc.common.decorators import timeit

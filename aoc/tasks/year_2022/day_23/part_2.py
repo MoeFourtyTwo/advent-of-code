@@ -5,7 +5,6 @@ import pathlib
 import typing
 from operator import attrgetter
 
-from loguru import logger
 from tqdm import tqdm
 
 from aoc.common.decorators import timeit

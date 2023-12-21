@@ -25,7 +25,6 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
     from_left = ("L", "-", "F")
     from_right = ("L", "-", "F")
     from_top = ("|", "L", "J")
-    from_bot = ("7", "|", "F")
 
     while data[row, column] != "S" or distance == 0:
         current_pos_cache = (row, column)
