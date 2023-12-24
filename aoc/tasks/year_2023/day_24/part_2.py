@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import dataclasses
-import itertools
 import pathlib
 
 import z3
