@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import functools
 import itertools
-import operator
+import math
 import pathlib
 
 import networkx as nx
@@ -30,9 +29,7 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
         if len(cut) != 3:
             continue
 
-        for edge in cut:
-            g.remove_edge(*edge)
-
-        return functools.reduce(operator.mul, map(len, nx.connected_components(g)), 1)
+        g.remove_edges_from(cut)
+        return math.prod(map(len, nx.connected_components(g)))
 
     raise ValueError(f"No solution found")
