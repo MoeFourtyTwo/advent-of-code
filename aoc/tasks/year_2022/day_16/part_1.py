@@ -13,7 +13,6 @@ DATA_PATH = get_data_path(__file__)
 
 
 def parse_graph(lines: list[str]) -> None:
-
     node_name_list, flow_rate_list, tunnels_list = zip(
         *[
             line.removeprefix("Valve ")
@@ -38,7 +37,11 @@ GRAPH = nx.Graph()
 
 class Solver:
     def __init__(
-        self, opened: set | None = None, starting_node: str = "AA", current_time: int = 0, total_time: int = 30
+        self,
+        opened: set | None = None,
+        starting_node: str = "AA",
+        current_time: int = 0,
+        total_time: int = 30,
     ) -> None:
         self.current_minute = current_time
         self.max_minute = total_time
@@ -77,7 +80,9 @@ class Solver:
         return (
             open_time * flow_rate
             + Solver(
-                self.opened | {path[-1]}, starting_node=path[-1], current_time=self.current_minute + len(path)
+                self.opened | {path[-1]},
+                starting_node=path[-1],
+                current_time=self.current_minute + len(path),
             ).next_move()
         )
 

@@ -70,9 +70,9 @@ def settle_bricks(bricks: list[Brick]) -> list[Brick]:
     for brick in bricks:
         ground_max_z = np.max(ground[brick.x_min : brick.x_max, brick.y_min : brick.y_max])
         settled_brick = brick.move(delta_z=-(brick.z_min - ground_max_z))
-        ground[
-            settled_brick.x_min : settled_brick.x_max, settled_brick.y_min : settled_brick.y_max
-        ] = settled_brick.z_max
+        ground[settled_brick.x_min : settled_brick.x_max, settled_brick.y_min : settled_brick.y_max] = (
+            settled_brick.z_max
+        )
         settled_bricks.append(settled_brick)
 
     return settled_bricks

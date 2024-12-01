@@ -13,7 +13,6 @@ DATA_PATH = get_data_path(__file__)
 
 
 def parse_stacks(lines: list[str]) -> STACKS_TYPE:
-
     index_row, *lines = reversed(lines)
 
     stacks = defaultdict(deque)
@@ -45,7 +44,8 @@ class Move:
     @classmethod
     def parse(cls, line: str) -> Move:
         count, from_stack, to_stack = map(
-            int, line.replace("move ", "").replace(" from ", " ").replace(" to ", " ").split()
+            int,
+            line.replace("move ", "").replace(" from ", " ").replace(" to ", " ").split(),
         )
         return Move(from_stack=from_stack, to_stack=to_stack, count=count)
 

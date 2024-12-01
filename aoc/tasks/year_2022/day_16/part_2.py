@@ -16,7 +16,6 @@ DATA_PATH = get_data_path(__file__)
 
 
 def parse_graph(lines: list[str]) -> tuple[dict[str, int], dict[str, list[str]]]:
-
     node_name_list, flow_rate_list, tunnels_list = zip(
         *[
             line.removeprefix("Valve ")
@@ -60,7 +59,10 @@ def go(path: pathlib.Path = DATA_PATH):
 
     @functools.cache
     def find_flow_rate(
-        current_node: str, remaining_time: int, remaining_candidates: frozenset, two_agents: bool
+        current_node: str,
+        remaining_time: int,
+        remaining_candidates: frozenset,
+        two_agents: bool,
     ) -> int:
         return max(
             [
@@ -76,7 +78,10 @@ def go(path: pathlib.Path = DATA_PATH):
             ]
             + [
                 find_flow_rate(
-                    current_node="AA", remaining_time=26, remaining_candidates=remaining_candidates, two_agents=False
+                    current_node="AA",
+                    remaining_time=26,
+                    remaining_candidates=remaining_candidates,
+                    two_agents=False,
                 )
                 if two_agents
                 else 0
@@ -84,7 +89,10 @@ def go(path: pathlib.Path = DATA_PATH):
         )
 
     total_pressure_released = find_flow_rate(
-        current_node="AA", remaining_time=26, remaining_candidates=candidates, two_agents=True
+        current_node="AA",
+        remaining_time=26,
+        remaining_candidates=candidates,
+        two_agents=True,
     )
 
     logger.info(f"{total_pressure_released=}")

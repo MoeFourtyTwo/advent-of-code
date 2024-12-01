@@ -73,9 +73,9 @@ def settle_bricks(bricks: list[Brick]) -> tuple[list[Brick], int]:
         if (brick.z_min - ground_max_z) > 0:
             moved += 1
 
-        ground[
-            settled_brick.x_min : settled_brick.x_max, settled_brick.y_min : settled_brick.y_max
-        ] = settled_brick.z_max
+        ground[settled_brick.x_min : settled_brick.x_max, settled_brick.y_min : settled_brick.y_max] = (
+            settled_brick.z_max
+        )
         settled_bricks.append(settled_brick)
 
     return settled_bricks, moved

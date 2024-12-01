@@ -5,6 +5,7 @@ import enum
 import math
 import pathlib
 import typing
+
 from tqdm import tqdm
 
 from aoc.common.decorators import timeit
@@ -18,7 +19,7 @@ class Pulse(enum.Enum):
     HIGH = enum.auto()
 
 
-class Found(Exception):
+class FoundError(Exception):
     pass
 
 
@@ -65,7 +66,7 @@ class Machine:
                 found[source] = button_press_count
 
                 if len(found) == len(watched_sources):
-                    raise Found()
+                    raise FoundError()
 
             self[destination](source, pulse)
 
@@ -102,8 +103,7 @@ class Module(abc.ABC):
         self.identifier = identifier
 
     @abc.abstractmethod
-    def __call__(self, source: str, pulse: Pulse) -> None:
-        ...
+    def __call__(self, source: str, pulse: Pulse) -> None: ...
 
     def send_pulse(self, pulse: Pulse) -> None:
         for destination in self.destinations:
@@ -178,7 +178,7 @@ def go(path: pathlib.Path = DATA_PATH):
             pbar.update(1)
             try:
                 machine.press_button(total_presses, found, ["lh", "fk", "ff", "mm"], "nr", Pulse.HIGH)
-            except Found:
+            except FoundError:
                 break
     return math.lcm(*found.values())
 

@@ -20,7 +20,6 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
 
     s = z3.Solver()
     for name, constraint in split_lines:
-
         match [name] + constraint.split(" "):
             case ["root", l, _, r]:
                 s.add(variables[l] == variables[r])

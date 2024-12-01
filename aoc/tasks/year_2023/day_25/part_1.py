@@ -32,4 +32,4 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
         g.remove_edges_from(cut)
         return math.prod(map(len, nx.connected_components(g)))
 
-    raise ValueError(f"No solution found")
+    raise ValueError("No solution found")

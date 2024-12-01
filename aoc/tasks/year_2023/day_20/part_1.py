@@ -104,8 +104,7 @@ class Module(abc.ABC):
         self.identifier = identifier
 
     @abc.abstractmethod
-    def __call__(self, source: str, pulse: Pulse) -> None:
-        ...
+    def __call__(self, source: str, pulse: Pulse) -> None: ...
 
     def send_pulse(self, pulse: Pulse) -> None:
         self.machine.stats.register(pulse, len(self.destinations))
