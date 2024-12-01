@@ -1,40 +1,17 @@
-[tool.poetry]
-name = "advent-of-code-2022"
-version = "0.1.0"
-description = ""
-authors = ["Moritz Strenger <moritz.strenger@gmail.com>"]
-license = "MIT"
-readme = "README.md"
-packages = [{include = "aoc"}]
+[dependency-groups]
+dev = [
+    "pre-commit<3.0.0,>=2.20.0",
+    "pytest<8.0.0,>=7.2.0",
+    "py-spy<1.0.0,>=0.3.14",
+    "ruff<1.0.0,>=0.8.0",
+]
 
-[tool.poetry.scripts]
-exec = "aoc.runner:main"
-
-[tool.poetry.dependencies]
-python = "^3.11"
-rich = "^12.6.0"
-fire = "^0.5.0"
-numpy = "^1.23.5"
-pandas = "^1.5.2"
-loguru = "^0.6.0"
-networkx = "^2.8.8"
-tqdm = "^4.64.1"
-joblib = "^1.2.0"
-scipy = "^1.9.3"
-z3-solver = "^4.11.2.0"
-advent-of-code-data = "^2.0.1"
-python-dotenv = "^1.0.0"
-
-
-[tool.poetry.group.dev.dependencies]
-pre-commit = "^2.20.0"
-pytest = "^7.2.0"
-py-spy = "^0.3.14"
-ruff = "^0.8.0"
+[tool.pdm.build]
+includes = ["aoc"]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [tool.ruff]
 line-length = 120
@@ -42,3 +19,31 @@ extend-exclude = ["aoc/tasks/_template_day", "tests/tasks/_template_day"]
 
 [tool.ruff.lint]
 select = ["E", "F", "N", "I", "W"]
+
+[project]
+authors = [
+    {name = "Moritz Strenger", email = "moritz.strenger@gmail.com"},
+]
+license = {text = "MIT"}
+requires-python = "<4.0,>=3.11"
+dependencies = [
+    "rich<13.0.0,>=12.6.0",
+    "fire<1.0.0,>=0.5.0",
+    "numpy<2.0.0,>=1.23.5",
+    "pandas<2.0.0,>=1.5.2",
+    "loguru<1.0.0,>=0.6.0",
+    "networkx<3.0.0,>=2.8.8",
+    "tqdm<5.0.0,>=4.64.1",
+    "joblib<2.0.0,>=1.2.0",
+    "scipy<2.0.0,>=1.9.3",
+    "z3-solver<5.0.0.0,>=4.11.2.0",
+    "advent-of-code-data<3.0.0,>=2.0.1",
+    "python-dotenv<2.0.0,>=1.0.0",
+]
+name = "advent-of-code-2022"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+
+[project.scripts]
+exec = "aoc.runner:main"
