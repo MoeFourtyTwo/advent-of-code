@@ -9,5 +9,5 @@ DATA_PATH = get_data_path(__file__)
 
 
 @timeit
-def go(path: pathlib.Path = DATA_PATH):
+def go(path: pathlib.Path = DATA_PATH) -> int:
     lines = get_lines(path)

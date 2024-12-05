@@ -35,7 +35,7 @@ def sort_page_list(page_list: list[int], rules: dict[int, set[int]]) -> list[int
 
 
 @timeit
-def go(path: pathlib.Path = DATA_PATH):
+def go(path: pathlib.Path = DATA_PATH) -> int:
     lines = get_lines(path)
 
     sep_index = lines.index("")
