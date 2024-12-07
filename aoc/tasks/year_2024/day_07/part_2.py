@@ -31,15 +31,15 @@ def concat(left: int, right: int) -> int:
     return 10 ** (math.floor(math.log10(right)) + 1) * left + right
 
 
-def eval_calibration(target: int, current: int, operands: list[int]) -> bool:
-    if len(operands) == 0:
+def eval_calibration(target: int, current: int, operands: list[int], index: int = 0) -> bool:
+    if len(operands) == index:
         return target == current
 
     if current > target:
         return False
 
     return (
-        eval_calibration(target, current + operands[0], operands[1:])
-        or eval_calibration(target, current * operands[0], operands[1:])
-        or eval_calibration(target, concat(current, operands[0]), operands[1:])
+        eval_calibration(target, current + operands[index], operands, index + 1)
+        or eval_calibration(target, current * operands[index], operands, index + 1)
+        or eval_calibration(target, concat(current, operands[index]), operands, index + 1)
     )
