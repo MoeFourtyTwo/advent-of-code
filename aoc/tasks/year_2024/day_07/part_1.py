@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import operator
 import pathlib
 
 from aoc.common.decorators import timeit
@@ -40,11 +39,9 @@ def eval_calibration(target: int, current: int, operands: list[int]) -> bool:
     if target > calc_upper_bound(current, operands):
         return False
 
-    for op in [operator.add, operator.mul]:
-        if eval_calibration(target, op(current, operands[0]), operands[1:]):
-            return True
-
-    return False
+    return eval_calibration(target, current + operands[0], operands[1:]) or eval_calibration(
+        target, current * operands[0], operands[1:]
+    )
 
 
 def calc_upper_bound(current: int, operands: list[int]) -> int:
