@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-import functools
 import operator
 import pathlib
-import typing
 
 from aoc.common.decorators import timeit
 from aoc.common.storage import get_data_path, get_lines
@@ -33,6 +31,9 @@ def eval_calibration(target: int, current: int, operands: list[int]) -> bool:
     if len(operands) == 0:
         return target == current
 
+    if current > target:
+        return False
+
     if target < calc_lower_bound(current, operands):
         return False
 
@@ -44,10 +45,6 @@ def eval_calibration(target: int, current: int, operands: list[int]) -> bool:
             return True
 
     return False
-
-
-def collapse(op: typing.Callable[[int, int], int], current: int, operands: list[int]) -> int:
-    return functools.reduce(op, operands, current)
 
 
 def calc_upper_bound(current: int, operands: list[int]) -> int:
