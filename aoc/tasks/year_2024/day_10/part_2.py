@@ -25,9 +25,8 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
     known = defaultdict(int)
     for i in range(1, grid.shape[0] - 1):
         for j in range(1, grid.shape[1] - 1):
-            find_reachable_peaks(grid, known, (i, j))
-
             if grid[i, j] == 0:
+                find_reachable_peaks(grid, known, (i, j))
                 score += known[(i, j)]
 
     return score

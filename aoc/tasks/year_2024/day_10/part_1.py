@@ -25,15 +25,14 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
     known = defaultdict(set)
     for i in range(1, grid.shape[0] - 1):
         for j in range(1, grid.shape[1] - 1):
-            find_reachable_peaks(grid, known, (i, j))
-
             if grid[i, j] == 0:
+                find_reachable_peaks(grid, known, (i, j))
                 score += len(known[(i, j)])
 
     return score
 
 
-def find_reachable_peaks(grid: NDArray[Point, np.int_], known: defaultdict[Point, set[Point]], position: Point) -> None:
+def find_reachable_peaks(grid: NDArray[Point, np.int_], known: dict[Point, set[Point]], position: Point) -> None:
     if position in known:
         return
 
