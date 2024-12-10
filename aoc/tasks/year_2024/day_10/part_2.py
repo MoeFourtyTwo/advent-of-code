@@ -23,11 +23,10 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
     score = 0
 
     known = defaultdict(int)
-    for i in range(1, grid.shape[0] - 1):
-        for j in range(1, grid.shape[1] - 1):
-            if grid[i, j] == 0:
-                find_reachable_peaks(grid, known, (i, j))
-                score += known[(i, j)]
+
+    for i, j in np.argwhere(grid == 0):
+        find_reachable_peaks(grid, known, (i, j))
+        score += known[(i, j)]
 
     return score
 
@@ -47,7 +46,5 @@ def find_reachable_peaks(grid: NDArray[Point, np.int_], known: dict[Point, int],
         if gradient != 1:
             continue
 
-        if new_position not in known:
-            find_reachable_peaks(grid, known, new_position)
-
+        find_reachable_peaks(grid, known, new_position)
         known[position] += known[new_position]
