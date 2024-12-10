@@ -29,4 +29,10 @@ def get_lines(path: pathlib.Path, strip: bool = True, rstrip: bool = False) -> l
 
 
 def get_as_array(path: pathlib.Path) -> np.ndarray:
-    return np.genfromtxt(path, dtype=int, delimiter=1)
+    if path.name == "input.txt":
+        day = int(path.parent.name.removeprefix("day_"))
+        year = int(path.parent.parent.name.removeprefix("year_"))
+        data = get_data(day=day, year=year).splitlines()
+    else:
+        data = path
+    return np.genfromtxt(data, dtype=int, delimiter=1)
