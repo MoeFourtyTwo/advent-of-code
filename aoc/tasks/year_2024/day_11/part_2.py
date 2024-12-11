@@ -19,9 +19,9 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
         for number, count in numbers.items():
             if number == 0:
                 new_numbers[1] += count
-            elif (length := len(str(number))) % 2 == 0:
-                left = str(number)[: length // 2]
-                right = str(number)[length // 2 :]
+            elif (length := len(str_number := str(number))) % 2 == 0:
+                left = str_number[: length // 2]
+                right = str_number[length // 2 :]
                 new_numbers[int(left)] += count
                 new_numbers[int(right)] += count
             else:
