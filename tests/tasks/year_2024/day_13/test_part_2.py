@@ -5,4 +5,4 @@ TEST_PATH = get_data_path(__file__, "test.txt")
 
 
 def test_year_2024_day_13_part_2_go():
-    assert go(TEST_PATH) == 0
+    assert go(TEST_PATH) == 875318608908
