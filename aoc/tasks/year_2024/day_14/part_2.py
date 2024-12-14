@@ -23,7 +23,7 @@ def go(path: pathlib.Path = DATA_PATH, x_max: int = 101, y_max: int = 103) -> in
 
     positions = []
 
-    for t in track(range(10000)):
+    for t in track(range(x_max * y_max)):
         positions.append(set())
         for init_x, init_y, v_x, v_y in data:
             final_pos = simulate(init_x, init_y, v_x, v_y, x_max, y_max, t)
