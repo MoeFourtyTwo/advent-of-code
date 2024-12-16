@@ -9,13 +9,7 @@ from aoc.common.storage import get_data_path, get_lines
 
 DATA_PATH = get_data_path(__file__)
 
-DIRECTIONS = {
-    "N": complex(0, -1),
-    "E": complex(1, 0),
-    "S": complex(0, 1),
-    "W": complex(-1, 0),
-}
-
+DIRECTIONS = {"N": complex(0, -1), "E": complex(1, 0), "S": complex(0, 1), "W": complex(-1, 0)}
 CLOCKWISE = {
     DIRECTIONS["N"]: DIRECTIONS["E"],
     DIRECTIONS["E"]: DIRECTIONS["S"],

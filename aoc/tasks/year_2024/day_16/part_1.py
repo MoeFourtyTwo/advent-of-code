@@ -9,13 +9,7 @@ from aoc.common.storage import get_data_path, get_lines
 
 DATA_PATH = get_data_path(__file__)
 
-DIRECTIONS = {
-    "N": complex(0, -1),
-    "E": complex(1, 0),
-    "S": complex(0, 1),
-    "W": complex(-1, 0),
-}
-
+DIRECTIONS = {"N": complex(0, -1), "E": complex(1, 0), "S": complex(0, 1), "W": complex(-1, 0)}
 CLOCKWISE = {
     DIRECTIONS["N"]: DIRECTIONS["E"],
     DIRECTIONS["E"]: DIRECTIONS["S"],
@@ -39,7 +33,7 @@ class Node:
 def go(path: pathlib.Path = DATA_PATH) -> int:
     lines = get_lines(path)
 
-    grid = {}
+    grid = set()
 
     start = complex(0, 0)
     goal = complex(0, 0)
@@ -47,7 +41,7 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
     for y, line in enumerate(lines):
         for x, char in enumerate(line):
             if char == "#":
-                grid[complex(x, y)] = char
+                grid.add(complex(x, y))
             if char == "S":
                 start = complex(x, y)
             if char == "E":
