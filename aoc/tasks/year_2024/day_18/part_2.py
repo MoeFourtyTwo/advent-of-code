@@ -24,8 +24,6 @@ def go(path: pathlib.Path = DATA_PATH, size: int = 70) -> str:
 
     for x in range(size + 1):
         for y in range(size + 1):
-            graph.add_node((x, y))
-
             for dx, dy in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
                 if 0 <= x + dx <= size and 0 <= y + dy <= size:
                     graph.add_edge((x, y), (x + dx, y + dy))
