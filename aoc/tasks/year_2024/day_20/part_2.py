@@ -51,8 +51,7 @@ def go(path: pathlib.Path = DATA_PATH, min_saving: int = 100) -> int:
 
     for index, position in enumerate(track(steps)):
         for second_index, second_position in enumerate(steps[index:], start=index):
-            distance = abs(second_position.real - position.real) + abs(second_position.imag - position.imag)
-            if distance > 20:
+            if (distance := abs(second_position.real - position.real) + abs(second_position.imag - position.imag)) > 20:
                 continue
 
             time_saved = second_index - index - distance
