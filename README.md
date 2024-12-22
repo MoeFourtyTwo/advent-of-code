@@ -2,7 +2,6 @@
 
 ![Advent of Code](https://img.shields.io/badge/Advent%20of%20Code-Yearly-brightgreen)
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
-[![Poetry](https://img.shields.io/badge/Poetry-purple)](https://python-poetry.org/)
 
 This repository contains my solutions to the Advent of Code challenges for various years, implemented in Python. Advent of Code is an annual coding event with daily programming puzzles throughout the month of December. These solutions are my personal implementations and are meant for educational purposes.
 
@@ -30,12 +29,10 @@ Advent of Code is a fantastic way to improve your programming skills, problem-so
    cd advent-of-code
    ```
 
-3. **Install Dependencies with Poetry:**
+3. **Install Dependencies with uv:**
    ```bash
-   poetry install
+   uv sync
    ```
-
-   Make sure you have [Poetry](https://python-poetry.org/) installed.
 
 4. **Set Up Your Session Token:**
    Create a `.env` file in the project root with the following content:
@@ -46,7 +43,7 @@ Advent of Code is a fantastic way to improve your programming skills, problem-so
 
 5. **Run the Python Script:**
    ```bash
-   poetry run exec run --year <year> --day <day> --part <part>
+   uv run exec run --year <year> --day <day> --part <part>
    ```
 
    Replace `<year>`, `<day>`, and `<part>` with the corresponding values. Any omitted value will be extracted from the current date.
@@ -54,7 +51,7 @@ Advent of Code is a fantastic way to improve your programming skills, problem-so
 6. **Use Templates to Generate Starting Points For New Solutions:**
 
    ```bash
-   poetry run exec generate --year <year> --day <day> --part <part>
+   uv run exec generate --year <year> --day <day> --part <part>
    ```
    
    Replace `<year>`, `<day>`, and `<part>` with the corresponding values. Any omitted value will be extracted from the current date.
