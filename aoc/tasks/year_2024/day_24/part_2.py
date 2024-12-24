@@ -42,10 +42,9 @@ def go(path: pathlib.Path = DATA_PATH) -> str:
 
     suspicious = set()
     for op1, op2, op, res in tasks:
-        # last op must be XOR except for the last z
         if res[0] == "z" and op != "XOR" and res != last_z:
             suspicious.add(res)
-        # XOR must have at least one input from x, y, z
+
         if (
             op == "XOR"
             and res[0] not in ["x", "y", "z"]
@@ -54,13 +53,11 @@ def go(path: pathlib.Path = DATA_PATH) -> str:
         ):
             suspicious.add(res)
 
-        # Check for AND operations not involving 'x00'
         if op == "AND" and "x00" not in [op1, op2]:
             for sub_op1, sub_op2, sub_op, sub_res in tasks:
                 if (res == sub_op1 or res == sub_op2) and sub_op != "OR":
                     suspicious.add(res)
 
-        # Check for XOR operations followed by OR operations
         if op == "XOR":
             for sub_op1, sub_op2, sub_op, sub_res in tasks:
                 if (res == sub_op1 or res == sub_op2) and sub_op == "OR":
