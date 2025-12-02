@@ -24,23 +24,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-    - name: Install uv
-      uses: astral-sh/setup-uv@v4
-      with:
-        enable-cache: true
-        cache-dependency-glob: "uv.lock"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: 0.9.14
 
-    - name: Set up Python
-      run: uv python install
+      - name: Set up Python
+        run: uv python install
 
-    - name: Install the project
-      run: uv sync
+      - name: Install the project
+        run: uv sync
 
-    - name: Run script
-      env:
-        AOC_SESSION: ${{ secrets.AOC_SESSION }}
-      run: |
-        uv run exec run --year "${{ inputs.year }}" --day "${{ inputs.day }}" --part "${{ inputs.part }}"
+      - name: Run script
+        env:
+          AOC_SESSION: ${{ secrets.AOC_SESSION }}
+        run: |
+          uv run exec run --year "${{ inputs.year }}" --day "${{ inputs.day }}" --part "${{ inputs.part }}"
