@@ -40,7 +40,7 @@ dependencies = [
     "advent-of-code-data<3.0.0,>=2.0.1",
     "python-dotenv<2.0.0,>=1.0.0",
 ]
-name = "advent-of-code-2022"
+name = "advent-of-code"
 version = "0.1.0"
 description = ""
 readme = "README.md"

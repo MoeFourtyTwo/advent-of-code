@@ -78,7 +78,7 @@ Advent of Code is a fantastic way to improve your programming skills, problem-so
 - **data/**
   - **year_<year>/**
     - **day_<day>/**
-      - `example.txt`: Example input data for testing.
+      - `test.txt`: Example input data for testing.
 
 - **tests/**
   - **tasks/**
