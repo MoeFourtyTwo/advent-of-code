@@ -12,40 +12,29 @@ DATA_PATH = get_data_path(__file__)
 def go(path: pathlib.Path = DATA_PATH) -> int:
     lines = get_lines(path)
 
-    new_ranges = set()
+    input_ranges = []
 
-    it = iter(lines)
-
-    for line in it:
+    for line in lines:
         if not line:
             break
         lower_bound, upper_bound = map(int, line.split("-"))
-        new_ranges.add((lower_bound, upper_bound))
+        input_ranges.append((lower_bound, upper_bound))
 
-    cleansed_ranges = set()
+    input_ranges = sorted(input_ranges)
 
-    while new_ranges:
-        current_lower, current_upper = new_ranges.pop()
+    condensed_ranges = []
+    current_range = input_ranges.pop(0)
 
-        added = False
-        new_cleansed_ranges = set()
-        while cleansed_ranges:
-            other_lower, other_upper = cleansed_ranges.pop()
+    while input_ranges:
+        next_candidate = input_ranges.pop(0)
 
-            overlapping = max(current_lower, other_lower) <= min(current_upper, other_upper)
+        if current_range[1] >= next_candidate[0]:
+            current_range = (current_range[0], max(current_range[1], next_candidate[1]))
+        else:
+            condensed_ranges.append(current_range)
+            current_range = next_candidate
 
-            if overlapping:
-                added = True
-                lower = min(current_lower, other_lower)
-                upper = max(current_upper, other_upper)
-                new_ranges.add((lower, upper))
-                break
+    if condensed_ranges[-1] != current_range:
+        condensed_ranges.append(current_range)
 
-            new_cleansed_ranges.add((other_lower, other_upper))
-
-        if not added:
-            new_cleansed_ranges.add((current_lower, current_upper))
-
-        cleansed_ranges |= new_cleansed_ranges
-
-    return sum(upper - lower + 1 for lower, upper in cleansed_ranges)
+    return sum(upper - lower + 1 for lower, upper in condensed_ranges)
