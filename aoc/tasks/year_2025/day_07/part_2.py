@@ -37,7 +37,7 @@ def go(path: pathlib.Path = DATA_PATH) -> int:
     lines = get_lines(path)
 
     splitters = set()
-    initial_position = complex(00, 0)
+    initial_position = complex(0, 0)
 
     for y, line in enumerate(lines):
         for x, char in enumerate(line):
