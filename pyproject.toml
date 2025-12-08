@@ -39,6 +39,7 @@ dependencies = [
     "z3-solver<5.0.0.0,>=4.11.2.0",
     "advent-of-code-data<3.0.0,>=2.0.1",
     "python-dotenv<2.0.0,>=1.0.0",
+    "scipy-stubs~=1.14.1",
 ]
 name = "advent-of-code"
 version = "0.1.0"
